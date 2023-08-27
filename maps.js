@@ -1,13 +1,14 @@
 
 const emojis = {
     "-": " ",
-    O: "🚪",
-    X: "💣",
-    I: "🎁",
-    PLAYER: "🤖",
-    BOMB_COLLISION: "🔥",
-    GAME_OVER: "🤬",
-    WIN: "🏆",
+    "O": "🚪",
+    "X": "💣",
+    "I": "🎁",
+    "PLAYER": "🤖",
+    "BOMB_COLLISION": "🔥",
+    "GAME_OVER": "🤬",
+    "WIN": "🏆",
+    "HEART": '❤️',
 };
 const maps = [];
 maps.push(`
@@ -46,15 +47,15 @@ maps.push(`
     XX-----OXX
     XXXXXXXXXX
 `);
-maps.push(`
-    XXX-----XX
-    XXX-XXX-XX
-    XX--XXX--X
-    X-XXXXXX-X
-    X--XXXXX-X
-    XX-XXXX--X
-    X---XX--XX
-    XX---XX-XX
-    XXO--XX--X
-    XXXXXXXX-I
-`);
+// maps.push(`
+//     O---XXXXXX
+//     XXX--XX-XX
+//     XXXXX----X
+//     XXXXXX--XX
+//     XXX-X--XXX
+//     XX-XX-XX-X
+//     X--X-X--XX
+//     XX--X--XXX
+//     XX---XX--X
+//     XXXXX----I
+// `);
