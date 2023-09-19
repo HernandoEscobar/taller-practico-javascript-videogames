@@ -5,11 +5,18 @@ const btnRight = document.querySelector('#right');
 const btnDown = document.querySelector('#down');
 const btnLeft = document.querySelector('#left');
 const spanLives = document.querySelector('#lives');
+const spanTime= document.querySelector('#time');
+const spanRecord= document.querySelector('#record');
+const pResult= document.querySelector('#result');
 
 let canvasSize;
 let elementsSize;
 let level = 0;
 let lives = 3;
+
+let timeStart;
+let timePlayer;
+let timeInterval;
 
 const playerPosition = {
     x: undefined,
@@ -55,6 +62,12 @@ function startGame() {
     if (!map) {
         gameWin();
         return;
+    }
+
+    if (!timeStart) {
+        timeStart = Date.now();
+        timeInterval = setInterval(showTime, 100);
+        showRecord()
     }
     const mapRows = map.trim().split('\n');
     const mapRowsCols = mapRows.map(row => row.trim().split(''));
@@ -136,6 +149,7 @@ function levelFail() {
     if (lives <= 0) {
         level = 0;
         lives = 3;
+        timeStart = undefined;
     }
 
     playerPosition.x = undefined;
@@ -145,7 +159,24 @@ function levelFail() {
 }
 
 function gameWin() {
+    clearInterval(timeInterval);
 
+    const recordTime = localStorage.getItem('record_time');
+    const playerTime = Date.now() - timeStart;
+    if (recordTime) {
+    
+        if (recordTime >= playerTime) {
+            localStorage.setItem('record_time', playerTime);
+            pResult.innerHTML = 'Superaste el record';
+        } else {
+            pResult.innerHTML = 'Lo siento no superaste el record';
+        }
+    } else {
+        localStorage.setItem('record_time', playerTime);
+        pResult.innerHTML = 'Primera vez?, Muy bien superate!!! '
+    }
+
+    console.log({recordTime, playerTime});
 }
 
 function showLives() {
@@ -154,6 +185,14 @@ function showLives() {
     spanLives.innerHTML = "";
     heartsArray.forEach(heart => spanLives.append(heart));
 
+}
+
+function showTime() {
+    spanTime.innerHTML = Date.now() - timeStart;
+}
+
+function showRecord() {
+    spanRecord.innerHTML = localStorage.getItem('record_time');
 }
 
 window.addEventListener('keydown', moveByKeys);
